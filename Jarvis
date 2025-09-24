@@ -1,0 +1,57 @@
+import speech_recognition as sr
+import pyttsx3
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# 1. Initialize TTS engine
+engine = pyttsx3.init()
+
+def speak(text):
+    print("JARVIS:", text)
+    engine.say(text)
+    engine.runAndWait()
+
+# 2. Listen to user
+def listen():
+    recognizer = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening... 🎤")
+        audio = recognizer.listen(source)
+        try:
+            query = recognizer.recognize_google(audio)
+            print("You said:", query)
+            return query.lower()
+        except sr.UnknownValueError:
+            speak("Sorry, I did not catch that.")
+            return ""
+        except sr.RequestError:
+            speak("Speech service error.")
+            return ""
+
+# 3. Dummy dataset (replace later with SQL/real data)
+data = {
+    "Year": [2022, 2023, 2024],
+    "Sales": [150000, 200000, 250000]
+}
+df = pd.DataFrame(data)
+
+# 4. Process simple commands
+def process_command(query):
+    if "sales" in query:
+        # Generate chart
+        df.plot(kind="bar", x="Year", y="Sales", legend=False)
+        plt.title("Sales by Year")
+        plt.ylabel("Sales (in Rs)")
+        plt.show()
+
+        latest_sales = df.iloc[-1]["Sales"]
+        speak(f"Sales in {df.iloc[-1]['Year']} are {latest_sales} rupees")
+    else:
+        speak("I can only show sales for now. Please try asking about sales.")
+
+# 5. Main loop
+if __name__ == "__main__":
+    speak("Hello Naveen, your AI Assistant is online.")
+    query = listen()
+    if query:
+        process_command(query)
