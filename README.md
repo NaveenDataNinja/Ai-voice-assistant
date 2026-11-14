@@ -1,5 +1,8 @@
 # Priya Voice Assistant
 
+**Author and maintainer:** Naveen Kumar Narasapuram
+([NaveenDataNinja](https://github.com/NaveenDataNinja)).
+
 Priya is a personal assistant prototype with a local AI learning companion,
 Wikipedia research, persistent tasks, and interactive 3D illustrations. It
 also tells the time, opens websites, and finds music on YouTube. It does not
@@ -362,3 +365,17 @@ With the dependencies installed, run:
 Install both `requirements.txt` and `web-requirements.txt` to run the full test
 suite. Tests simulate external services and audio devices; they do not verify your
 microphone, speakers, or AR/VR hardware.
+
+## License
+
+Copyright (c) 2026 Naveen Kumar Narasapuram.
+This project's original code and documentation are available under the
+[MIT License](LICENSE), allowing reuse, modification, and redistribution
+provided the copyright and permission notice are retained.
+
+Third-party components retain their own licenses. In particular, the bundled
+FFmpeg build is GPL v3; its [license](ffmpeg-8.0-essentials_build/ffmpeg-8.0-essentials_build/LICENSE)
+and [build/source information](ffmpeg-8.0-essentials_build/ffmpeg-8.0-essentials_build/README.txt)
+remain unchanged. Comply with the applicable third-party terms when
+redistributing those components. The project MIT license does not relicense
+FFmpeg, dependencies, AI models, or content obtained from external services.
