@@ -1,0 +1,23 @@
+{
+  "status": "portability_verification_in_progress",
+  "updated_at": "2026-11-14T10:37:26+00:00",
+  "description": "Developer-maintained implementation and browser-test notes. Automated test counts come separately from the real unittest runner.",
+  "steps": [
+    {"name": "Reliable actions and natural-language routing", "status": "verified", "evidence": "Live reminder saved in SQLite before confirmation; polite website commands covered by tests. Real HTTP task create/update/delete completed and the acceptance fixture was removed."},
+    {"name": "Persistent, acknowledged reminders", "status": "verified", "evidence": "Overdue reminder survived a real server restart and appeared in two tabs; acknowledgement synchronized."},
+    {"name": "Voice queue and recovery", "status": "verified", "evidence": "Recorded fixture was queued during an in-flight reply and delivered afterwards; queued retry retained an unsent draft."},
+    {"name": "Streaming, formatting and references", "status": "verified_locally", "evidence": "Real Ollama tokens and sanitized final formatting rendered in the browser. Stop left an incomplete marker and released the AI lock with zero active streams. Wikipedia references and missing/invalid citation fallback were tested."},
+    {"name": "Password access and deployment safeguards", "status": "verified_locally", "evidence": "Real HTTP smoke test passed login, HttpOnly/SameSite cookies, CSRF, protected monitor access, action and logout using temporary credentials. Unit tests cover secure cookies, rate thresholds and missing production credentials. No password was enabled on the main local server."},
+    {"name": "In-chat updates and live Developer Monitor", "status": "verified_locally", "evidence": "Browser showed runtime stages, queued/cancelled requests, full generation timing, file-change notices and actual test totals. Disconnect warning and reconnect recovery passed. Mobile view checked at 390px without horizontal page overflow."},
+    {"name": "Automated regression and live reporting", "status": "passed", "evidence": "55 tests passed through python -m app_monitor --test, including four private task migration tests. A reproduced Windows report-replacement lock was fixed with bounded retries and tested for transient and permanent failures. Installed dependency consistency and git diff --check passed."},
+    {"name": "New Windows laptop setup and private migration", "status": "verification_in_progress", "evidence": "Python 3.11 setup/start scripts, tested version constraints and migration guide added. Private SQLite snapshot restored and compared in isolation; current data untouched. Clean-clone setup validation is next."}
+  ],
+  "limitations": [
+    "Cloud deployment, real AR/VR hardware and physical microphone/speaker testing are not verified.",
+    "Local loopback mode remains passwordless unless configured; production requires credentials and HTTPS.",
+    "Development file detection starts at the current server baseline and is not a reconstruction of earlier edits.",
+    "Wikipedia citation checks validate reference numbers, not factual entailment of every sentence.",
+    "The local model may ignore requested answer lengths or formatting instructions; important answers need human review.",
+    "Live unittest totals are automatic; development phase notes and browser-test evidence are developer-maintained, not automatic narration of every editor action."
+  ]
+}

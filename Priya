@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 engine = pyttsx3.init()
 
 def speak(text):
-    print("JARVIS:", text)
+    print("Priya:", text)
     engine.say(text)
     engine.runAndWait()
 
@@ -51,7 +51,7 @@ def process_command(query):
 
 # 5. Main loop
 if __name__ == "__main__":
-    speak("Hello Naveen, your AI Assistant is online.")
+    speak("Hello, Priya your AI Assistant is online.")
     query = listen()
     if query:
         process_command(query)

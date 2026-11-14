@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in | Priya</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="login-page">
+  <main class="login-card">
+    <h1>Welcome to Priya</h1>
+    <p>Your private learning companion.</p>
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" maxlength="256" required autofocus>
+      {% if error %}<p role="alert">{{ error }}</p>{% endif %}
+      <button class="primary-button" type="submit">Sign in</button>
+    </form>
+  </main>
+</body>
+</html>

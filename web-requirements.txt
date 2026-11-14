@@ -1,0 +1,7 @@
+Flask>=3.1,<4
+faster-whisper>=1.2,<2
+Markdown>=3.7,<4
+bleach>=6.2,<7
+gTTS>=2.5,<3
+yt-dlp
+gunicorn>=23,<24; sys_platform != "win32"

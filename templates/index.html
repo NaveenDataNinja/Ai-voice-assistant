@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10172c">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>Priya | Your voice companion</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='api.js', v='3') }}" defer></script>
+  <script src="{{ url_for('static', filename='monitor.js', v='1') }}" defer></script>
+  <script src="{{ url_for('static', filename='app.js', v='3') }}" defer></script>
+  <script src="{{ url_for('static', filename='tasks.js', v='3') }}" defer></script>
+  <script src="{{ url_for('static', filename='studio.js') }}" defer></script>
+</head>
+<body data-downloads-enabled="{{ 'true' if downloads_enabled else 'false' }}" data-release="{{ release }}">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="Priya home">
+        <span class="brand-icon" aria-hidden="true">✦</span>
+        <span><strong>priya<span class="brand-dot">.</span></strong><small>YOUR VOICE COMPANION</small></span>
+      </a>
+      <button class="new-chat" id="new-chat" type="button"><span aria-hidden="true">＋</span> New conversation <span class="new-chat-shortcut">↗</span></button>
+      <div class="sidebar-label">YOUR WORKSPACE</div>
+      <div class="sidebar-current"><span class="sidebar-current-icon">✧</span> Conversation <span class="current-dot"></span></div>
+      <button class="sidebar-tool" type="button" data-open-panel="studio-panel"><span>◇</span> 3D studio <span>↗</span></button>
+      <button class="sidebar-tool" type="button" data-open-panel="tasks-panel"><span>☑</span> Tasks & reminders <span>↗</span></button>
+      <button class="sidebar-tool" type="button" id="show-updates"><span>✧</span> What's new <span>↗</span></button>
+      <button class="sidebar-tool" type="button" data-open-panel="monitor-panel"><span>◎</span> Developer monitor <span>↗</span></button>
+      <div class="sidebar-bottom">
+        <div class="side-card"><div class="side-card-icon">✦</div><strong>A little help, whenever<br>you need it.</strong><p>Talk, type, and make the most of your day.</p></div>
+        <div class="profile"><div class="profile-avatar">P</div><div><strong>Priya assistant</strong><small>Ready when you are</small></div><span class="profile-more">···</span></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-title"><span class="mobile-logo">✦</span><strong>Priya</strong><span class="topbar-divider"></span><span class="topbar-subtitle">Your personal assistant</span></div>
+        <div class="topbar-actions"><button class="icon-button tool-top" type="button" data-open-panel="studio-panel" aria-label="Open 3D studio">◇ <span>3D studio</span></button><button class="icon-button tool-top" type="button" data-open-panel="tasks-panel" aria-label="Open tasks">☑ <span>Tasks</span></button><button id="service-status" class="status" type="button" title="Check server and AI status">Checking services</button><button id="voice-toggle" class="icon-button voice-toggle" type="button" aria-pressed="false" title="Turn spoken replies on">◖)) <span>Voice off</span></button><button class="mobile-new icon-button" id="mobile-new" type="button" aria-label="New conversation">＋</button></div>
+      </header>
+      <div id="reminder-banner" class="reminder-banner" role="alert" hidden><span id="reminder-text"></span><button type="button" data-open-panel="tasks-panel">Review reminders</button></div>
+      <p id="session-expired" role="alert" hidden>Your session expired. <a href="/login" target="_blank" rel="noopener">Sign in in a new tab</a>, then resend your message.</p>
+
+      <section class="conversation" aria-label="Conversation">
+        <div class="conversation-inner">
+          <div class="day-divider"><span></span> YOUR SPACE TO GET THINGS DONE <span></span></div>
+          <div class="messages" id="messages" aria-live="polite" aria-relevant="additions"></div>
+          <div class="suggestions" id="suggestions" aria-label="Suggested commands">
+            <button type="button" data-command="Explain how an electric motor works"><span class="suggestion-icon blue">✧</span><span><strong>Learn a concept</strong><small>Explain an electric motor</small></span><b>↗</b></button>
+            <button type="button" data-command="Research solar energy"><span class="suggestion-icon purple">⌕</span><span><strong>Research a topic</strong><small>Find Wikipedia sources</small></span><b>↗</b></button>
+            <button type="button" data-command="Play a song"><span class="suggestion-icon cyan">♫</span><span><strong>Find some music</strong><small>Set the right mood</small></span><b>↗</b></button>
+            <button type="button" data-command="Show atom"><span class="suggestion-icon pink">◇</span><span><strong>Explore in 3D</strong><small>Visualize an atom</small></span><b>↗</b></button>
+          </div>
+        </div>
+      </section>
+
+      <div class="composer-area">
+        <div class="composer-inner">
+          <div class="input-caption"><span class="sparkle">✦</span> YOUR ASSISTANT IS READY <span>·</span> TYPE OR SPEAK</div>
+          <form id="chat-form" class="composer">
+            <label class="sr-only" for="message">Message Priya</label>
+            <input id="message" name="message" maxlength="500" autocomplete="off" placeholder="Ask Priya anything she can help with..." required>
+            <div class="composer-actions">
+              <button id="microphone" class="mic-button" type="button" aria-label="Use microphone" title="Use microphone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"></rect><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3m-3 0h6"></path></svg><span class="mic-dot"></span></button>
+              <button id="send" class="send-button" type="submit" aria-label="Send message">↑</button>
+              <button id="stop-reply" class="icon-button" type="button" hidden>Stop</button>
+            </div>
+          </form>
+          <div id="queued-messages" class="queued-messages" aria-live="polite"></div>
+          <div class="answer-options"><label><input id="grounding" type="checkbox"> Use Wikipedia sources for AI answers</label><button id="mobile-updates" class="notification-button" type="button">What's new</button><button class="notification-button" type="button" data-open-panel="monitor-panel">Monitor</button>{% if login_enabled %}<form action="/logout" method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="notification-button" type="submit">Sign out</button></form>{% endif %}</div>
+          <audio id="speech-player" hidden></audio>
+          <button id="speech-retry" class="icon-button" type="button" hidden>Enable audio</button>
+          <p class="voice-privacy">Microphone audio is transcribed on your Priya server. Voice on sends reply text to Google's speech service; avoid sensitive text.</p>
+          <div class="composer-footer"><span id="feedback" role="status">Local AI can make mistakes. Check important information.</span><span>Made for your everyday <span class="heart">♥</span></span></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <aside class="tool-panel monitor-panel" id="monitor-panel" aria-label="Developer monitor" hidden>
+    <div class="panel-header"><div><small>OBSERVABLE ACTIVITY</small><h2>Developer monitor</h2></div><button class="panel-close" type="button" data-close-panel aria-label="Close developer monitor">×</button></div>
+    <p class="panel-intro">See what Priya is doing and what development checks have actually finished. Polls every two seconds while this panel is visible.</p>
+    <p id="monitor-status" class="panel-status" role="status">Open this panel to connect.</p>
+    <div class="monitor-tabs"><button id="monitor-runtime-tab" type="button" aria-pressed="true">Runtime activity</button><button id="monitor-development-tab" type="button" aria-pressed="false">Development & tests</button></div>
+    <section id="monitor-runtime">
+      <div id="monitor-metrics" class="monitor-metrics"></div>
+      <p class="panel-footnote">For streams, setup time ends when HTTP headers are sent. The ai.completed/failed/cancelled events report full model duration. HTTP errors include intentional rejected or invalid test requests.</p>
+      <ol id="monitor-events" class="monitor-feed" aria-label="Live runtime events"></ol>
+    </section>
+    <section id="monitor-development" hidden>
+      <div id="monitor-progress" class="monitor-progress"></div>
+      <h3 id="monitor-development-status">Development progress</h3>
+      <ul id="monitor-steps" class="monitor-steps"></ul>
+      <h3>Files changed since server start</h3>
+      <p class="panel-footnote">Allowlisted file metadata only, not a source-code diff or historical audit. Python/server edits require a restart; static edits require a refresh.</p>
+      <ul id="monitor-files" class="monitor-files"></ul>
+      <h3>Limitations and unverified items</h3>
+      <ul id="monitor-limitations" class="monitor-files"></ul>
+    </section>
+    <p id="monitor-privacy" class="panel-footnote"></p>
+  </aside>
+
+  <aside class="tool-panel" id="tasks-panel" aria-label="Tasks and reminders" hidden>
+    <div class="panel-header"><div><small>YOUR WORKSPACE</small><h2>Tasks & reminders</h2></div><button class="panel-close" type="button" data-close-panel aria-label="Close tasks">×</button></div>
+    <p class="panel-intro">Saved reminders stay overdue until acknowledged, even after closing the browser.</p>
+    <form id="task-form" class="task-form">
+      <label for="task-title">New task</label>
+      <input id="task-title" maxlength="160" placeholder="What would you like to do?" required>
+      <label for="task-due">Reminder time <span>(optional)</span></label>
+      <input id="task-due" type="datetime-local">
+      <button class="primary-button task-add" type="submit">＋ Add task</button>
+    </form>
+    <button class="notification-button" id="enable-notifications" type="button">Enable desktop alerts</button>
+    <p class="panel-status" id="task-status" role="status"></p>
+    <div class="task-list-heading">YOUR TASKS</div>
+    <ul class="task-list" id="task-list" aria-label="Your tasks"></ul>
+    <p class="task-empty" id="task-empty">No tasks yet. A little progress starts here.</p>
+    <p class="panel-footnote">Tasks are saved on your Priya server. Overdue reminders appear when you return. Desktop alerts require an open page and permission.</p>
+  </aside>
+
+  <aside class="tool-panel studio-panel" id="studio-panel" aria-label="3D studio" hidden>
+    <div class="panel-header"><div><small>YOUR VISUAL SPACE</small><h2>3D studio</h2></div><button class="panel-close" type="button" data-close-panel aria-label="Close 3D studio">×</button></div>
+    <p class="panel-intro">Explore an animated assistant and learning models. Drag to rotate.</p>
+    <label class="studio-label" for="scene-select">Choose a visualization</label>
+    <select id="scene-select">
+      <option value="avatar">Priya's visual avatar</option>
+      <option value="atom">Atom model</option>
+      <option value="water">Water molecule</option>
+      <option value="solar">Solar system</option>
+    </select>
+    <div class="studio-stage"><canvas id="studio-canvas" aria-label="Animated 3D visualization"></canvas><div class="stage-label"><span></span> LIVE VISUALIZATION</div></div>
+    <p id="scene-description" class="scene-description"></p>
+    <div class="xr-actions"><button id="vr-button" type="button" class="secondary-button" hidden>Enter VR</button><button id="ar-button" type="button" class="secondary-button" hidden>Enter AR</button><button id="xr-exit" type="button" class="secondary-button" hidden>Exit immersive mode</button></div>
+    <p id="studio-status" class="panel-status" role="status"></p>
+    <p class="panel-footnote">Illustrations are simplified, not to scale. AR/VR requires HTTPS and compatible hardware. A screen image is not a physical hologram.</p>
+  </aside>
+
+  <dialog id="audio-dialog">
+    <form id="audio-form">
+      <div class="dialog-icon">♫</div>
+      <h2>Prepare temporary audio</h2>
+      <p>Enter the server's audio access key. Only download content you have permission to use.</p>
+      <label for="audio-key">Audio access key</label>
+      <input id="audio-key" type="password" autocomplete="off" required>
+      <p class="dialog-error" id="audio-error" role="alert"></p>
+      <div class="dialog-actions"><button type="button" id="audio-cancel" class="secondary-button">Cancel</button><button type="submit" id="audio-submit" class="primary-button">Prepare audio</button></div>
+    </form>
+  </dialog>
+</body>
+</html>

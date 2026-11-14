@@ -3,7 +3,7 @@ import pygame
 import time
 
 def speak(text):
-    print(f"JARVIS: {text}")
+    print(f"Priya: {text}")
     tts = gTTS(text=text, lang='en', slow=False, tld='co.uk')
     filename = "voice.mp3"
     tts.save(filename)
@@ -17,4 +17,4 @@ def speak(text):
     while pygame.mixer.music.get_busy():
         time.sleep(0.1)
 
-speak("Hello Naveen, this is Zara your AI assistant speaking.")
+speak("Hello, this is Priya your AI assistant speaking.")

@@ -8,7 +8,7 @@ import yt_dlp
 
 # --- Speak Function ---
 def speak(text):
-    print(f"JARVIS: {text}")
+    print(f"Priya: {text}")
     tts = gTTS(text=text, lang='en', slow=False, tld='co.uk')
     filename = "voice.mp3"
     tts.save(filename)
@@ -95,7 +95,7 @@ commands = {
     "open google": lambda cmd: (speak("Opening Google"), webbrowser.open("https://google.com")),
     "open chatgpt": lambda cmd: (speak("Opening ChatGPT"), webbrowser.open("https://chatgpt.com")),
     "show graph": lambda cmd: show_graph(),
-    "stop": lambda cmd: (speak("Goodbye Naveen. Jarvis signing off."), exit())
+    "stop": lambda cmd: (speak("Goodbye. Priya signing off."), exit())
 }
 
 # --- Match Command with Fuzzy Logic ---
@@ -106,7 +106,7 @@ def match_command(query):
     return None
 
 # --- Main Loop ---
-speak("Hello Naveen, Zara your AI assistant is online.")
+speak("Hello, Priya your AI assistant is online.")
 while True:
     command = listen()
     if command:

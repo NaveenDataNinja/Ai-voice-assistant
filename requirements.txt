@@ -1,0 +1,7 @@
+SpeechRecognition
+PyAudio
+gTTS
+pygame
+matplotlib
+rapidfuzz
+yt-dlp
