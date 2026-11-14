@@ -1,0 +1,35 @@
+name: Windows checks
+
+on:
+  push:
+    branches: [main, priya-v2-windows-portable]
+  pull_request:
+    branches: [main, priya-v2-windows-portable]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  regression:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    env:
+      PRIYA_DATA_DIR: ${{ runner.temp }}\priya-checks
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          architecture: x64
+      - name: Validate Windows setup and regression suite
+        shell: powershell
+        run: |
+          $python = (Get-Command python).Source
+          .\setup.ps1 -PythonExecutable $python -SkipModels

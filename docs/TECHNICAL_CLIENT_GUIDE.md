@@ -583,7 +583,7 @@ requires validation.
 
 Latest recorded runner: `python -m app_monitor --test`.
 
-Completed: **14 November 2026, 10:37 UTC**.
+Completed: **14 November 2026, 10:53 UTC**.
 
 Result: **55/55 passed, 0 failed, 0 errors, 0 skipped**.
 
@@ -598,6 +598,14 @@ Result: **55/55 passed, 0 failed, 0 errors, 0 skipped**.
 External-service responses and hardware are simulated in much of this suite.
 It does not constitute a measured model-quality benchmark or complete
 end-to-end production test.
+
+The [Windows checks workflow](../.github/workflows/windows-checks.yml) also
+reuses the setup script on clean GitHub-hosted Windows/Python 3.11 x64 runners
+for pushes and pull requests to `main` or the Priya branch. Models are skipped;
+no private credentials or hardware are required. Consult the commit-specific
+[Actions result](https://github.com/NaveenDataNinja/Ai-voice-assistant/actions/workflows/windows-checks.yml),
+not this recorded local baseline, to establish whether a later commit passed.
+These are regression checks, not public-hosting or model-quality certification.
 
 ### Separately observed integration/browser behavior
 

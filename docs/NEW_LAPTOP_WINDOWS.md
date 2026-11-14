@@ -66,6 +66,11 @@ it and have the necessary rights.
 
 Until reviewed and merged, the new application is on a review branch, not main:
 
+Share the [Priya branch page](https://github.com/NaveenDataNinja/Ai-voice-assistant/tree/priya-v2-windows-portable),
+which also exposes the current README and setup guide. The default repository
+page still opens the original `main` version. GitHub's **Your branches** and
+**Active branches** can show this same branch twice; do not delete it.
+
 ```powershell
 git clone --branch priya-v2-windows-portable --single-branch https://github.com/NaveenDataNinja/Ai-voice-assistant.git
 Set-Location -LiteralPath ".\Ai-voice-assistant"
@@ -225,6 +230,11 @@ powershell -NoProfile -File .\setup.ps1
 Commit or otherwise preserve your own changes before pulling. The setup reuses
 a compatible environment/models and reruns tests. Do not upgrade individual
 packages casually and assume the tested constraints remain applicable.
+
+Check the [Windows checks results](https://github.com/NaveenDataNinja/Ai-voice-assistant/actions/workflows/windows-checks.yml)
+for the exact commit you intend to share. These automated runs skip models and
+simulate external services/devices; still perform the real-laptop checklist in
+section 7 after setup.
 
 Configure your own Git author on your own laptop and sign in to your own
 GitHub account. Do not copy credential-manager files from another machine.

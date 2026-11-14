@@ -571,7 +571,7 @@ migration helper, migration tests and new-laptop guide are allowlisted.
 
 ### Recorded baseline
 
-The latest recorded local run completed on **14 November 2026 at 10:37 UTC**
+The latest recorded local run completed on **14 November 2026 at 10:53 UTC**
 using the live-reporting runner:
 
 | Suite | Tests | Main coverage |
@@ -597,6 +597,17 @@ target-host disaster-recovery restoration, and independent security review
 are not established by these results. The separate private task snapshot
 was restored and compared in an isolated temporary database without
 changing current data.
+
+### Automatic Windows checks
+
+The [Windows workflow](../.github/workflows/windows-checks.yml) reuses
+`setup.ps1 -SkipModels` on a clean Windows/Python 3.11 x64 runner for pushes
+and pull requests to `main` or the Priya review branch. It checks dependency
+installation/consistency and runs the same regression suite without real
+models, external services, devices, or repository secrets.
+Check [Actions](https://github.com/NaveenDataNinja/Ai-voice-assistant/actions/workflows/windows-checks.yml)
+for the exact commit's result; the local baseline above is separate evidence.
+This workflow does not deploy the application or certify hardware/cloud use.
 
 ### Commands
 

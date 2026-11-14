@@ -6,17 +6,6 @@ import pandas as pd
 from rapidfuzz import process
 import urllib.parse
 
-def play_song_on_youtube(command):
-    words = command.replace("open youtube", "").replace("play", "").strip()
-    if words:
-        query = urllib.parse.quote(words)
-        url = f"https://www.youtube.com/results?search_query={query}"
-        speak(f"Playing {words} on YouTube")
-        webbrowser.open(url)
-    else:
-        speak("Please tell me the song name.")
-
-
 # --- Speak Function ---
 def speak(text):
     print(f"Priya: {text}")
@@ -85,7 +74,6 @@ def match_command(query):
         return best_match
     return None
 
-# --- Main Loop ---
 # --- Main Loop ---
 speak("Hello, Priya your AI assistant is online.")
 last_command = ""

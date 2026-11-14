@@ -24,6 +24,7 @@ WATCHED_FILES = (
     "development_status.json",
     "setup.ps1", "start.ps1", "priya_data.py", "requirements-windows-py311.lock.txt",
     "tests\\test_priya_data.py", "docs\\NEW_LAPTOP_WINDOWS.md",
+    ".github\\workflows\\windows-checks.yml",
 )
 
 

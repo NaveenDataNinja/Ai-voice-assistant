@@ -1,6 +1,6 @@
 {
   "status": "local_portability_verification_complete",
-  "updated_at": "2026-11-14T10:44:05+00:00",
+  "updated_at": "2026-11-14T10:53:47+00:00",
   "description": "Developer-maintained implementation and browser-test notes. Automated test counts come separately from the real unittest runner.",
   "steps": [
     {"name": "Reliable actions and natural-language routing", "status": "verified", "evidence": "Live reminder saved in SQLite before confirmation; polite website commands covered by tests. Real HTTP task create/update/delete completed and the acceptance fixture was removed."},
@@ -10,7 +10,8 @@
     {"name": "Password access and deployment safeguards", "status": "verified_locally", "evidence": "Real HTTP smoke test passed login, HttpOnly/SameSite cookies, CSRF, protected monitor access, action and logout using temporary credentials. Unit tests cover secure cookies, rate thresholds and missing production credentials. No password was enabled on the main local server."},
     {"name": "In-chat updates and live Developer Monitor", "status": "verified_locally", "evidence": "Browser showed runtime stages, queued/cancelled requests, full generation timing, file-change notices and actual test totals. Disconnect warning and reconnect recovery passed. Mobile view checked at 390px without horizontal page overflow."},
     {"name": "Automated regression and live reporting", "status": "passed", "evidence": "55 tests passed through python -m app_monitor --test, including four private task migration tests. A reproduced Windows report-replacement lock was fixed with bounded retries and tested for transient and permanent failures. Installed dependency consistency and git diff --check passed."},
-    {"name": "New Windows laptop setup and private migration", "status": "verified_locally", "evidence": "Full setup ran from a clean Git clone with a fresh Windows x64/Python 3.11.9 environment; 55 tests passed. The start helper and real HTTP AI stream, Wikipedia, MP3 synthesis, local recognition fixture and monitor cleanup passed. Private task restore CLI passed in the clone. Existing model caches/Ollama were reused; physical new-laptop/hardware validation remains outstanding."}
+    {"name": "New Windows laptop setup and private migration", "status": "verified_locally", "evidence": "Full setup ran from a clean Git clone with a fresh Windows x64/Python 3.11.9 environment; 55 tests passed. The start helper and real HTTP AI stream, Wikipedia, MP3 synthesis, local recognition fixture and monitor cleanup passed. Private task restore CLI passed in the clone. Existing model caches/Ollama were reused; physical new-laptop/hardware validation remains outstanding."},
+    {"name": "Sharing clarity and automatic Windows checks", "status": "configured", "evidence": "Remote refs confirm two distinct branches; tracked-file hashing found no exact duplicates. Removed an overwritten duplicate function from a legacy experiment without changing its effective implementation. README and migration guide identify the correct sharing branch. GitHub Actions reuses setup with models skipped for clean Windows dependency/regression checks; consult Actions for the exact commit's remote result."}
   ],
   "limitations": [
     "Cloud deployment, real AR/VR hardware and physical microphone/speaker testing are not verified.",

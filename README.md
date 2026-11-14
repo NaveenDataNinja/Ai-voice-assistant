@@ -8,6 +8,18 @@ Priya's local AI is configured to recognize its companion as Naveen.
 Common identity questions use fixed replies to prevent the small model from
 confusing Naveen's role with Priya's.
 
+## Share the correct version
+
+Share this **[Priya next-version link](https://github.com/NaveenDataNinja/Ai-voice-assistant/tree/priya-v2-windows-portable)**,
+not the repository's default page: `main` still contains the original version.
+GitHub can list the same branch under both **Your branches** and **Active
+branches**; these are categories, not duplicate branches or applications.
+Do not delete a branch to remove a repeated category listing.
+
+Use the web setup below as the maintained application. The earlier experimental
+scripts are retained for learning/history and are not alternative web versions.
+Source sharing does not host a public application or transfer your private data.
+
 ## New laptop: clone Priya's next version
 
 For Windows x64 with Python 3.11, start with the
@@ -332,6 +344,14 @@ The other scripts and `Priya` are earlier experiments, not the maintained entry
 point. Some require additional packages such as pandas and pyttsx3.
 
 ## Tests
+
+The [Windows checks workflow](https://github.com/NaveenDataNinja/Ai-voice-assistant/actions/workflows/windows-checks.yml)
+runs on pushes and pull requests targeting `main` or the Priya review branch.
+It uses Python 3.11 x64 and the existing setup script with `-SkipModels` to
+validate constrained dependencies and the regression suite on a clean Windows
+runner. It does not need secrets, an Ollama service, model downloads, or audio
+hardware. A green check is automated regression evidence, not proof of working
+physical audio, online providers, public deployment, or every laptop.
 
 With the dependencies installed, run:
 
