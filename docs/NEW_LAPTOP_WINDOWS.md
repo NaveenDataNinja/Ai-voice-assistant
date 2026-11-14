@@ -27,6 +27,27 @@ for online Google speech, Wikipedia, and YouTube features.
 Git does not transfer permanent chat history because the app does not maintain
 one. It also must not transfer the old laptop's credentials or private data.
 
+### Portability verification performed
+
+On 14 November 2026, the next-version branch was cloned into a separate folder
+and its full setup script was run with a **new virtual environment** on Windows
+x64/Python 3.11.9. All **55 regression tests passed**. The start script then
+served the clone on a separate local port, and actual HTTP checks passed for:
+
+- Dependency readiness and release/monitor endpoints.
+- A separately restored task database.
+- Real Ollama streaming and final formatted output.
+- Wikipedia retrieval.
+- Google Indian-English MP3 generation.
+- Local recognition of a generated speech fixture and deterministic command
+  routing from the recognized text.
+- Zero remaining active AI streams after completion.
+
+The test reused this Windows account's existing model caches and the running
+Ollama service. It did not physically test another laptop, a human microphone
+or speaker, or AR/VR hardware. Perform section 7 on your own laptop; do not
+treat a clean environment test as a guarantee of every device/network.
+
 ## 2. Install prerequisites
 
 1. Install Git for Windows from <https://git-scm.com/downloads/win>.

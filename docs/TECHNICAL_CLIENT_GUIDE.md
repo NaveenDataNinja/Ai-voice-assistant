@@ -16,6 +16,8 @@ safeguards; not a certified or production-accepted service.
 For implementation onboarding and support procedures, see the
 [Developer Handbook](DEVELOPER_HANDBOOK.md). For commands, see the
 [README](../README.md).
+The [New Laptop Windows Guide](NEW_LAPTOP_WINDOWS.md) documents the separate
+clean-clone/fresh-environment setup verification and private task migration.
 
 ---
 

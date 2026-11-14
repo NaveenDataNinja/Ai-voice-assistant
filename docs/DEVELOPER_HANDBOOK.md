@@ -13,6 +13,9 @@ has these features configured. The latest recorded local regression run passed
 **Read alongside:** [Technical Client Guide](TECHNICAL_CLIENT_GUIDE.md) for
 architecture review, API contracts, deployment gates, and acceptance discussions.
 The [README](../README.md) remains the shorter setup reference.
+For clone/setup/private task migration on your own Windows machine, follow the
+[New Laptop Windows Guide](NEW_LAPTOP_WINDOWS.md), including its clean-clone
+verification evidence and hardware/network limitations.
 
 ---
 
