@@ -18,8 +18,6 @@ jobs:
   regression:
     runs-on: windows-latest
     timeout-minutes: 20
-    env:
-      PRIYA_DATA_DIR: ${{ runner.temp }}\priya-checks
     steps:
       - uses: actions/checkout@v5
         with:
@@ -30,6 +28,8 @@ jobs:
           architecture: x64
       - name: Validate Windows setup and regression suite
         shell: powershell
+        env:
+          PRIYA_DATA_DIR: ${{ runner.temp }}\priya-checks
         run: |
           $python = (Get-Command python).Source
           .\setup.ps1 -PythonExecutable $python -SkipModels
